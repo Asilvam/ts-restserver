@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
 const db = new sequelize_1.Sequelize('postgres_db', 'admin_db', 'admin_12345678', {
-    host: 'localhost',
+    host: '127.0.0.1',
     port: 5432,
     dialect: 'postgres',
 });

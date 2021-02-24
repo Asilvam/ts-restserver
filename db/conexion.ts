@@ -1,8 +1,8 @@
 import {Sequelize} from 'sequelize';
 
-const db= new Sequelize('postgres','postgres','mysecretpassword',{
-    host:'192.168.0.13',
-    port:5433,
+const db= new Sequelize('POSTGRES_DB','POSTGRES_USER','POSTGRES_PASSWORD',{
+    host:'localhost',
+    port:5432,
     dialect:'postgres',
 })
 

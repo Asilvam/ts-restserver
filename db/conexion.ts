@@ -1,7 +1,7 @@
 import {Sequelize} from 'sequelize';
 
 const db= new Sequelize('postgres','postgres','mysecretpassword',{
-    host:'100.65.44.79',
+    host:'192.168.0.13',
     port:5433,
     dialect:'postgres',
 })

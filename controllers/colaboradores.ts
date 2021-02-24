@@ -44,7 +44,6 @@ export const postColaborador = async (req: Request, res: Response) => {
     const colaborador = new Colaborador(body);
     await colaborador.save();
     const horario = new Horario();
-
     res.json(colaborador);
   } catch (error) {
     console.log(error);

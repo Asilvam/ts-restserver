@@ -6,5 +6,6 @@ const db = new sequelize_1.Sequelize(process.env.POSTGRES_DB || "postgres_db", p
     port: 5432,
     dialect: "postgres",
 });
+//const sequelize = new Sequelize('postgres://user:pass@localhost:5432/dbname') // Example for postgres
 exports.default = db;
 //# sourceMappingURL=conexion.js.map

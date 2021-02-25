@@ -24,7 +24,7 @@ class Server {
             colaboradores: "/api/colaboradores",
         };
         this.app = express_1.default();
-        this.port = process.env.PORT || "8000";
+        this.port = process.env.PORT || "5000";
         this.dbConexion();
         this.middlewares();
         this.routes();

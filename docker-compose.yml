@@ -1,5 +1,17 @@
 version: "3"
 services:
+  api:
+    container_name: api
+    image: ts-restserver
+    depends_on: 
+      - postgres
+    build: .
+    ports:
+       - "8000:5000"
+    environment:
+       - PSQL_HOST=postgres
+    volumes:
+       - .:/usr/src/app
   postgres:
     container_name: postgresdb
     image: postgres:9.6
@@ -11,18 +23,7 @@ services:
       - postgres-data:/var/lib/postgresql/data
     ports:
       - 5432:5432
-  api:
-    container_name: api
-    image: ts-restserver
-    depends_on: 
-      - postgres
-    build: .
-    ports:
-       - "8000:8000"
-    environment:
-       - PSQL_HOST=postgres
-    volumes:
-       - .:/usr/src/app
+
 volumes:
   postgres-data:
     external: false

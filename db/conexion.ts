@@ -5,5 +5,5 @@ import { Sequelize } from "sequelize";
 //    port: 5432,
 //    dialect: "postgres",
 //  });
-const db = new Sequelize('postgres://admin_db:admin_12345678@posgres:5432/postgres_db')
+const db = new Sequelize('postgres://admin_db:admin_12345678@postgres:5432/postgres_db')
 export default db;

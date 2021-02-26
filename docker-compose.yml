@@ -14,6 +14,8 @@ services:
        - PSQL_HOST=postgres
     volumes:
        - .:/usr/src/app
+    networks: 
+      - interna
   postgres:
     container_name: postgresdb
     image: postgres:9.6
@@ -25,7 +27,10 @@ services:
       - postgres-data:/var/lib/postgresql/data
     ports:
       - 5432:5432
-
+    networks: 
+      - interna
 volumes:
   postgres-data:
     external: false
+networks: 
+    interna:

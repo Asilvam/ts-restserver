@@ -16,16 +16,19 @@ services:
       - interna
   postgres:
     container_name: postgresdb
-    image: postgres:latest
+    image: postgres:9.6
     environment: 
        - POSTGRES_DB=postgres_db
        - POSTGRES_USER=admin_db
        - POSTGRES_PASSWORD=admin_12345678
     volumes:
-      - ./tmp/db:/var/lib/postgresql/data
+      - postgres-data:/var/lib/postgresql/data
     ports:
       - 5432:5432
     networks: 
       - interna
+volumes:
+  postgres-data:
+    external: false
 networks: 
     interna:

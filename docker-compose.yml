@@ -8,8 +8,6 @@ services:
     build: .
     ports:
        - "8000:5000"
-    links:
-       - postgres  
     environment:
        - PSQL_HOST=postgres
     volumes:

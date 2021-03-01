@@ -1,13 +1,12 @@
 import { Request, Response } from "express";
-import Colaborador, { Horario } from "../models/colaborador";
+import Colaborador from "../models/colaborador";
 
-Colaborador.hasMany(Horario, { foreignKey: "rut" });
-Horario.belongsTo(Colaborador, { foreignKey: "rut" });
+// Colaborador.hasMany(Horario, { foreignKey: "rut" });
+// Horario.belongsTo(Colaborador, { foreignKey: "rut" });
 
 export const getColaboradores = async (req: Request, res: Response) => {
   const colaboradores = await Colaborador.findAll({
     where: { estado: true },
-    include: [Horario],
   });
   res.json(colaboradores);
 };
@@ -16,7 +15,6 @@ export const getColaborador = async (req: Request, res: Response) => {
   const { id } = req.params;
   const colaborador = await Colaborador.findAll({
     where: { id: id },
-    include: [Horario],
   });
   if (colaborador.length > 0) {
     res.json(colaborador);
@@ -29,7 +27,6 @@ export const getColaborador = async (req: Request, res: Response) => {
 
 export const postColaborador = async (req: Request, res: Response) => {
   const { body } = req;
-  const rut = req.body.rut;
   try {
     const existeRut = await Colaborador.findOne({
       where: {
@@ -43,7 +40,6 @@ export const postColaborador = async (req: Request, res: Response) => {
     }
     const colaborador = new Colaborador(body);
     await colaborador.save();
-    const horario = new Horario();
     res.json(colaborador);
   } catch (error) {
     console.log(error);

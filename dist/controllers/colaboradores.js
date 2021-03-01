@@ -1,23 +1,4 @@
 "use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -27,15 +8,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteColaborador = exports.postColaborador = exports.getColaborador = exports.getColaboradores = void 0;
-const colaborador_1 = __importStar(require("../models/colaborador"));
-colaborador_1.default.hasMany(colaborador_1.Horario, { foreignKey: "rut" });
-colaborador_1.Horario.belongsTo(colaborador_1.default, { foreignKey: "rut" });
+const colaborador_1 = __importDefault(require("../models/colaborador"));
+// Colaborador.hasMany(Horario, { foreignKey: "rut" });
+// Horario.belongsTo(Colaborador, { foreignKey: "rut" });
 const getColaboradores = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const colaboradores = yield colaborador_1.default.findAll({
         where: { estado: true },
-        include: [colaborador_1.Horario],
     });
     res.json(colaboradores);
 });
@@ -44,7 +27,6 @@ const getColaborador = (req, res) => __awaiter(void 0, void 0, void 0, function*
     const { id } = req.params;
     const colaborador = yield colaborador_1.default.findAll({
         where: { id: id },
-        include: [colaborador_1.Horario],
     });
     if (colaborador.length > 0) {
         res.json(colaborador);
@@ -58,7 +40,6 @@ const getColaborador = (req, res) => __awaiter(void 0, void 0, void 0, function*
 exports.getColaborador = getColaborador;
 const postColaborador = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { body } = req;
-    const rut = req.body.rut;
     try {
         const existeRut = yield colaborador_1.default.findOne({
             where: {
@@ -72,7 +53,6 @@ const postColaborador = (req, res) => __awaiter(void 0, void 0, void 0, function
         }
         const colaborador = new colaborador_1.default(body);
         yield colaborador.save();
-        const horario = new colaborador_1.Horario();
         res.json(colaborador);
     }
     catch (error) {

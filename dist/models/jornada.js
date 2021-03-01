@@ -9,8 +9,15 @@ const Jornada = conexion_1.default.define("Jornada", {
     nombre: {
         type: sequelize_1.DataTypes.STRING,
     },
+    cod_jornada: {
+        type: sequelize_1.DataTypes.STRING,
+    },
+    horario: {
+        type: sequelize_1.DataTypes.STRING,
+    },
     estado: {
-        type: sequelize_1.DataTypes.BOOLEAN, defaultValue: true,
+        type: sequelize_1.DataTypes.BOOLEAN,
+        defaultValue: true,
     },
 });
 exports.default = Jornada;

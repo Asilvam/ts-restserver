@@ -1,22 +1,25 @@
-version: "3"
+version: "3.4"
 services:
   api:
-    container_name: api
     image: ts-restserver
     depends_on: 
-      - postgres
+      - postgresdb
     build: .
     ports:
        - "8000:5000"
     environment:
-       - PSQL_HOST=postgres
+      - DBHOST=postgresdb
+      - MAIN_DB=postgres_db
+      - DBUSER=admin_db
+      - DBPSSWD=admin_12345678
+      - DBPORT=5432
     volumes:
        - .:/usr/src/app
     networks: 
       - interna
-  postgres:
-    container_name: postgresdb
-    image: postgres:9.6
+  postgresdb:
+    image: postgres:latest
+    restart: always
     environment: 
        - POSTGRES_DB=postgres_db
        - POSTGRES_USER=admin_db
